@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  *
- * @author  Renzo T 
+ *
  * @version 1.0
  */
 @Stateless

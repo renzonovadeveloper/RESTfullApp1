@@ -1,15 +1,16 @@
-package com.readlearncode.dukesbookshop.restserver.domain;
+package com.readlearncode.dukesbookshop.domain;
 
-import javax.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.UUID;
 
 /**
  *
+ *
+ *
  * @version 1.0
  */
-@XmlRootElement
-public class Author extends Hypermedia implements Serializable {
+public class Author implements Serializable {
 
     private String id;
     private String firstName;
@@ -18,11 +19,20 @@ public class Author extends Hypermedia implements Serializable {
 
     public Author(){}
 
-    public Author(String id, String firstName, String lastName, String blogURL) {
-        this.id = id;
+    public Author(String firstName, String lastName){
+        this.id = UUID.randomUUID().toString();
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Author(String firstName, String lastName, String blogURL){
+        this(firstName, lastName);
         this.blogURL = blogURL;
+    }
+
+    public Author(String id, String firstName, String lastName, String blogURL){
+        this(firstName, lastName, blogURL);
+        this.id = id;
     }
 
     public String getId() {
@@ -55,22 +65,6 @@ public class Author extends Hypermedia implements Serializable {
 
     public void setBlogURL(String blogURL) {
         this.blogURL = blogURL;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Author author = (Author) o;
-        return Objects.equals(id, author.id) &&
-                Objects.equals(firstName, author.firstName) &&
-                Objects.equals(lastName, author.lastName) &&
-                Objects.equals(blogURL, author.blogURL);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, blogURL);
     }
 
     @Override

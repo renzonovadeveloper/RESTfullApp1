@@ -64,6 +64,7 @@
                                     </properties>
                                 </deployable>
                             </deployables>
+
                             <configuration>
                                 <properties>
                                     <cargo.servlet.port>8081</cargo.servlet.port>

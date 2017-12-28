@@ -7,7 +7,7 @@ import java.util.Optional;
 
 /**
  *
- * @author  Renzo T 
+ *
  * @version 1.0
  */
 public interface AuthorRepository {

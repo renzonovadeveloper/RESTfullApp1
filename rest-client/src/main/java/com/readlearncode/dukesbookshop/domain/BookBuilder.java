@@ -1,21 +1,19 @@
-package com.readlearncode.dukesbookshop.restserver.domain;
+package com.readlearncode.dukesbookshop.domain;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
-/**
- *
- * @version 1.0
- */
+
 public class BookBuilder {
     private String id;
     private String title;
     private String description;
     private Float price;
-    private Date published;
-    private ArrayList<Author> authors = new ArrayList<>();
+    private String published;
+    private List<Author> authors = new ArrayList<>();
     private String imageFileName;
     private String link;
+    private List<LinkResource> links;
 
     public BookBuilder setId(String id) {
         this.id = id;
@@ -37,12 +35,12 @@ public class BookBuilder {
         return this;
     }
 
-    public BookBuilder setPublished(Date published) {
+    public BookBuilder setPublished(String published) {
         this.published = published;
         return this;
     }
 
-    public BookBuilder setAuthors(ArrayList<Author> authors) {
+    public BookBuilder setAuthors(List<Author> authors) {
         this.authors.addAll(authors);
         return this;
     }
@@ -62,7 +60,12 @@ public class BookBuilder {
         return this;
     }
 
+    public BookBuilder setHyperlinks(List<LinkResource> links){
+        this.links = links;
+        return this;
+    }
+
     public Book createBook() {
-        return new Book(id, title, description, authors, price, imageFileName, link, published);
+        return new Book(id, title, description, price, published, authors, imageFileName, link, links);
     }
 }

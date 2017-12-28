@@ -1,125 +1,113 @@
-package com.readlearncode.dukesbookshop.restserver.domain;
+package com.readlearncode.dukesbookshop.domain;
 
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
 /**
  *
+ *
+ *
  * @version 1.0
  */
-@XmlRootElement
 public class Book extends Hypermedia implements Serializable {
-
     private static final long serialVersionUID = 1L;
-    private static final String IMAGE_LOCATION = "/images/covers/";
 
-    @Size(min = 10, max = 10, message = "ISBN should be 10 characters")
     private String id;
-
-    @Size(min = 5)
     private String title;
-
-    @Size(min = 20)
     private String description;
-
-    @Size(min = 1)
-    private ArrayList<Author> authors = new ArrayList<>();
-
-    @DecimalMin("0.00")
+    private List<Author> authors = Collections.emptyList();
     private Float price;
-
-    @NotNull
     private String imageFileName;
-
-    @NotNull
-    @Pattern(regexp="^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$")
     private String link;
+    private String published;
 
-    @Past
-    private Date published;
+    public Book(){}
 
-
-    public Book() {
-    }
-
-    public Book(String id, String title, String description, ArrayList<Author> authors, Float price, String imageFileName, String link, Date published) {
+    public Book(String id, String title, String description, Float price, String published, List<Author> authors, String imageFileName, String link, List<LinkResource> links) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.authors = authors;
         this.price = price;
-        this.imageFileName = imageFileName.length() == 0 ? IMAGE_LOCATION.concat("no_image.png") : imageFileName;
-        this.link = link;
         this.published = published;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setAuthors(ArrayList<Author> authors) {
         this.authors = authors;
-    }
-
-    public void setPrice(Float price) {
-        this.price = price;
-    }
-
-    public void setImageFileName(String imageFileName) {
         this.imageFileName = imageFileName;
-    }
-
-    public void setLink(String link) {
         this.link = link;
+        this.setLinks(links);
     }
 
-    public void setPublished(Date published) {
-        this.published = published;
-    }
-
-    public String getId() {
+    public final String getId() {
         return id;
     }
 
-    public String getTitle() {
+    public final void setId(final String id) {
+        this.id = id;
+    }
+
+    public final String getTitle() {
         return title;
+    }
+
+    public final void setTitle(final String title) {
+        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public ArrayList<Author> getAuthors() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public final Float getPrice() {
+        return price;
+    }
+
+    public final void setPrice(final Float price) {
+        this.price = price;
+    }
+
+    public final String getPublished() {
+        return published;
+    }
+
+    public final void setPublished(final String published) {
+        this.published = published;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public List<Author> getAuthors() {
         return authors;
     }
 
-    public Float getPrice() {
-        return price;
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public void addAuthor(Author author){
+        this.authors.add(author);
     }
 
     public String getImageFileName() {
         return imageFileName;
     }
 
+    public void setImageFileName(String imageFileName) {
+        this.imageFileName = imageFileName;
+    }
+
     public String getLink() {
         return link;
     }
 
-    public Date getPublished() {
-        return published;
+    public void setLink(String link) {
+        this.link = link;
     }
 
     @Override
@@ -152,7 +140,7 @@ public class Book extends Hypermedia implements Serializable {
                 ", price=" + price +
                 ", imageFileName='" + imageFileName + '\'' +
                 ", link='" + link + '\'' +
-                ", published=" + published +
+                ", published='" + published + '\'' +
                 '}';
     }
 }
